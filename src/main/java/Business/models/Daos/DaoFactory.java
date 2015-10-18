@@ -1,4 +1,4 @@
-package Business.Models.Daos;
+package Business.models.Daos;
 
 public abstract class DaoFactory {
     
@@ -13,8 +13,8 @@ public abstract class DaoFactory {
         return factory;
     }
 
-    public abstract Entity1Dao getEntity1Dao();
+    public abstract VoteDao getVoteDao();
 
-    public abstract Entity2Dao getEntity2Dao();
+    public abstract ThemeDao getThemeDao();
 
 }

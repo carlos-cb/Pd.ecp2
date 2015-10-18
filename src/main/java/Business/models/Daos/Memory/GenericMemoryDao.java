@@ -1,6 +1,10 @@
-package Business.Models.Daos.Memory;
+package Business.models.Daos.Memory;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+
+import Business.models.Daos.GenericDao;
 
 public abstract class GenericMemoryDao<T, ID> implements GenericDao<T, ID> {
 
