@@ -16,8 +16,8 @@ public class BusinessController{
 		
 	}
 
-	public List<Theme> showThemes() {
-		return DaoFactory.getFactory().getThemeDao().findAll();
+	public List<String> showThemes() {
+		return DaoFactory.getFactory().getThemeDao().findAllNames();
 	}
 	
 	public void voteTheme(VoteTransferObject voteTransferObject){
@@ -39,7 +39,6 @@ public class BusinessController{
             if(j > 0){
             	average = total/j;
             }
-            //double average = getAverage(votes);
             voteTransferObject.add(new VoteTransferObject(themes.get(i).getName(), average));
         }
         return voteTransferObject;

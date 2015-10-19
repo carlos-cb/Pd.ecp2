@@ -1,15 +1,19 @@
 package Presentation.presenters;
 
+import java.util.List;
+
+import Business.controllers.BusinessController;
 import Presentation.models.Model;
 
 public class ThemeManagerPresenter{
 	
-	public String process(Model model) {
-		return null;
+	public List<String> process() {
+		List<String> themes = new BusinessController().showThemes();
+        return themes;
 	}
 
-	public String createTheme(Model model, String themeName) {
-		return themeName;
+	public void createTheme(Model model) {
+		new BusinessController().createTheme((String) model.get("themeName"));
 		
 	}
 }
