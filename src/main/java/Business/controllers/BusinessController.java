@@ -6,7 +6,7 @@ import java.util.List;
 import Business.models.Daos.DaoFactory;
 import Business.models.entities.Theme;
 import Business.models.entities.Vote;
-import Business.views.ThemeAverageTransferObject;
+import Business.views.ThemeTransferObject;
 import Business.views.VoteTransferObject;
 
 public class BusinessController{
@@ -31,23 +31,24 @@ public class BusinessController{
 		idVote++;
 	}
 	
-	public List<ThemeAverageTransferObject> getAverage() {
+	public List<ThemeTransferObject> getAverage() {
 		List<Theme> themes = DaoFactory.getFactory().getThemeDao().findAll();
-        List<ThemeAverageTransferObject> themeAverageTransferObject = new ArrayList<>();
-        int total = 0;
-        int j = 0;
-        int average =0;
+        List<ThemeTransferObject> themeTransferObject = new ArrayList<>();
         for (int i = 0; i < themes.size(); i++) {
             List<Vote> votes = DaoFactory.getFactory().getVoteDao().findByTheme(themes.get(i));
-            total += votes.get(i).getVote();
-            j++;
-            if(j > 0){
-            	average = total/j;
-            }
-            themeAverageTransferObject.add(new ThemeAverageTransferObject(themes.get(i).getName(), average));
+            double average = getmedia(votes);
+            themeTransferObject.add(new ThemeTransferObject(themes.get(i).getName(), average));
         }
-        return themeAverageTransferObject;
+        return themeTransferObject;
 	}
-	
-	
+
+    private double getmedia(List<Vote> votes) {
+        double total = 0;
+        double media = 0;
+        for (int i = 0; i < votes.size(); i++) {
+        	total += votes.get(i).getVote();
+        }
+            media = total / votes.size();
+        return media;
+    }
 }

@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Business.controllers.BusinessController;
-import Business.views.ThemeAverageTransferObject;
+import Business.views.ThemeTransferObject;
 import Business.views.VoteTransferObject;
 import Presentation.models.Model;
 
 public class VotingPresenter{
 	
 	public List<String> process() {
-        List<ThemeAverageTransferObject> themeAverages = new BusinessController().getAverage();
+        List<ThemeTransferObject> themeTransferObject = new BusinessController().getAverage();
         List<String> averagesList = new ArrayList<>();
-        for (int i = 0; i < themeAverages.size(); i++) {
-            averagesList.add("[themeName=" + themeAverages.get(i).getThemeName() + 
-            		", average=" + themeAverages.get(i).getAverage() + "]");
+        for (int i = 0; i < themeTransferObject.size(); i++) {
+            averagesList.add("[themeName=" + themeTransferObject.get(i).getThemeName() + 
+            		", average=" + themeTransferObject.get(i).getAverage() + "]");
         }
         return averagesList;
 
