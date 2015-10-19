@@ -6,13 +6,16 @@ import java.util.List;
 import Business.models.Daos.DaoFactory;
 import Business.models.entities.Theme;
 import Business.models.entities.Vote;
+import Business.views.ThemeAverageTransferObject;
 import Business.views.VoteTransferObject;
 
 public class BusinessController{
 
+	private static int idTheme = 0;
+	
 	public void createTheme(String themeName) {
-		int id = DaoFactory.getFactory().getThemeDao().findAll().size() + 1;
-        DaoFactory.getFactory().getThemeDao().create(new Theme(id, themeName));
+        DaoFactory.getFactory().getThemeDao().create(new Theme(idTheme, themeName));
+        idTheme++;
 		
 	}
 
@@ -20,15 +23,17 @@ public class BusinessController{
 		return DaoFactory.getFactory().getThemeDao().findAllNames();
 	}
 	
+	private static int idVote = 0;
+	
 	public void voteTheme(VoteTransferObject voteTransferObject){
-		int id = DaoFactory.getFactory().getVoteDao().findAll().size() + 1;
-        Theme t = DaoFactory.getFactory().getThemeDao().findByName(voteTransferObject.getThemeName());
-        DaoFactory.getFactory().getVoteDao().create(new Vote(id, voteTransferObject.getVote(), t));
+		Theme t = DaoFactory.getFactory().getThemeDao().findByName(voteTransferObject.getThemeName());
+        DaoFactory.getFactory().getVoteDao().create(new Vote(idVote, voteTransferObject.getVote(), t));
+		idVote++;
 	}
 	
-	public List<VoteTransferObject> showAverage() {
+	public List<ThemeAverageTransferObject> getAverage() {
 		List<Theme> themes = DaoFactory.getFactory().getThemeDao().findAll();
-        List<VoteTransferObject> voteTransferObject = new ArrayList<>();
+        List<ThemeAverageTransferObject> themeAverageTransferObject = new ArrayList<>();
         int total = 0;
         int j = 0;
         int average =0;
@@ -39,9 +44,9 @@ public class BusinessController{
             if(j > 0){
             	average = total/j;
             }
-            voteTransferObject.add(new VoteTransferObject(themes.get(i).getName(), average));
+            themeAverageTransferObject.add(new ThemeAverageTransferObject(themes.get(i).getName(), average));
         }
-        return voteTransferObject;
+        return themeAverageTransferObject;
 	}
 	
 	

@@ -4,22 +4,18 @@ public class VoteTransferObject {
 	
 	private String themeName;
 
-    private int average;
+    private int vote;
 
-    public VoteTransferObject(String themeName, int average) {
+    public VoteTransferObject(String themeName, int vote) {
         this.themeName = themeName;
-        this.average = average;
+        this.vote = vote;
     }
 
     public String getThemeName() {
         return themeName;
     }
 
-    public int getVote() {
-        return average;
-    }
-
-	public int getAverage() {
-		return average;
+	public int getVote() {
+		return vote;
 	}
 }

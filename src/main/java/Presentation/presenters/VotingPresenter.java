@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Business.controllers.BusinessController;
+import Business.views.ThemeAverageTransferObject;
 import Business.views.VoteTransferObject;
 import Presentation.models.Model;
 
 public class VotingPresenter{
 	
 	public List<String> process() {
-        List<VoteTransferObject> themeAverages = new BusinessController().showAverage();
+        List<ThemeAverageTransferObject> themeAverages = new BusinessController().getAverage();
         List<String> averagesList = new ArrayList<>();
         for (int i = 0; i < themeAverages.size(); i++) {
             averagesList.add("[themeName=" + themeAverages.get(i).getThemeName() + 
